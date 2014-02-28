@@ -18,22 +18,27 @@ int main( int args, char** argv ) {
   JNI_CreateJavaVM(&jvm, (void**)&env, &vmArgs);
 
 
-  jclass cls = env->FindClass("HelloCPP");
-  jmethodID mid = env->GetStaticMethodID(cls, "sayHello", "(I)V");
-  std::cout << cls ;
-  std::cout << "," << mid;
+  //jclass cls = env->FindClass("HelloCPP");
+  //jmethodID mid = env->GetStaticMethodID(cls, "sayHello", "(I)V");
+  jclass cls = env->FindClass("HelloSwing");
+  std::cout << "jclass:" << cls << endl;
+  jmethodID mid = env->GetStaticMethodID(cls, "main", "()V");
+
+  
+  std::cout << "jmethodID" << mid << std::endl;
 
   int  val = 0;
 
- env->CallStaticVoidMethod(cls, mid, 100);
+  env->CallStaticVoidMethod(cls, mid, 100);
     /* We are done. */
-  cin >> val;
-  jvm->DestroyJavaVM();
+  cout << "Unesi 9 za izlazak" << std::endl;
 
-  // here we can use the jvm
-  //
-  //    jvm->DestroyJavaVM();
-  //
-  //       return 0;
-  //       }
+  cin >> val;
+  cout << "before destroyJVM" << endl;
+
+  //jvm->DestroyJavaVM();
+
+  cout << "kraj" << endl;
+ 
+  return 0;
 }
